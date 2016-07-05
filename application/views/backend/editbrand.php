@@ -15,31 +15,42 @@
 <div class="row">
 <div class="col s12 m6">
 <label>about</label>
-<textarea name="about" placeholder="Enter text ..."><?php echo set_value( 'about',$before->about);?></textarea>
+<textarea id="some-textarea" name="about" placeholder="Enter text ..."><?php echo set_value( 'about',$before->about);?></textarea>
 </div>
 </div>
 <div class="row">
 <div class="col s12 m6">
 <label>salonexp</label>
-<textarea name="salonexp" placeholder="Enter text ..."><?php echo set_value( 'salonexp',$before->salonexp);?></textarea>
+<textarea id="some-textarea" name="salonexp" placeholder="Enter text ..."><?php echo set_value( 'salonexp',$before->salonexp);?></textarea>
 </div>
 </div>
 <div class="row">
-<div class="input-field col s6">
-<label for="mainimage">mainimage</label>
-<input type="text" id="mainimage" name="mainimage" value='<?php echo set_value('mainimage',$before->mainimage);?>'>
-</div>
-</div>
+			<div class="file-field input-field col m6 s12">
+				<span class="img-center big">
+								                    	<?php if($before->mainimage == "") { } else {
+									                    ?><img src="<?php echo base_url('uploads')."/".$before->mainimage; ?>">
+															<?php } ?>
+															</span>
+				<div class="btn blue darken-4">
+					<span>Image</span>
+					<input name="image" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->mainimage);?>">
+				</div>
+			</div><span style=" display: block;
+    padding-top: 30px;">640 X 410</span>
+		</div>
+    <div class="row">
+    <div class="input-field col s6">
+    <label for="videourl">collectionname</label>
+    <input type="text" id="collectionname" name="collectionname" value='<?php echo set_value('collectionname',$before->collectionname);?>'>
+    </div>
+    </div>
 <div class="row">
 <div class="col s12 m6">
-<label>collectionname</label>
-<textarea name="collectionname" placeholder="Enter text ..."><?php echo set_value( 'collectionname',$before->collectionname);?></textarea>
-</div>
-</div>
-<div class="row">
-<div class="input-field col s6">
-<label for="content">content</label>
-<input type="text" id="content" name="content" value='<?php echo set_value('content',$before->content);?>'>
+<label>content</label>
+<textarea id="some-textarea" name="content" placeholder="Enter text ..."><?php echo set_value( 'content',$before->content);?></textarea>
 </div>
 </div>
 <div class="row">
@@ -48,10 +59,10 @@
 <input type="text" id="videourl" name="videourl" value='<?php echo set_value('videourl',$before->videourl);?>'>
 </div>
 </div>
-<div class="row">
-<div class="input-field col s6">
-<label for="type">type</label>
-<input type="text" id="type" name="type" value='<?php echo set_value('type',$before->type);?>'>
+<div class=" row" style="display:block">
+<div class=" input-field col s6">
+<?php echo form_dropdown("type",$type,set_value('type',$this->input->get('id')));?>
+<label>type</label>
 </div>
 </div>
 <div class="row">

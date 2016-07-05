@@ -8,11 +8,7 @@
 <tr>
 <th data-field="id">id</th>
 <th data-field="name">name</th>
-<th data-field="about">about</th>
-<th data-field="salonexp">salonexp</th>
-<th data-field="mainimage">mainimage</th>
 <th data-field="collectionname">collectionname</th>
-<th data-field="content">content</th>
 <th data-field="videourl">videourl</th>
 <th data-field="type">type</th>
 </tr>
@@ -28,7 +24,18 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.name + "</td><td>" + resultrow.about + "</td><td>" + resultrow.salonexp + "</td><td>" + resultrow.mainimage + "</td><td>" + resultrow.collectionname + "</td><td>" + resultrow.content + "</td><td>" + resultrow.videourl + "</td><td>" + resultrow.type + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editbrand?id=');?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletebrand?id='); ?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
+  if(resultrow.type==1)
+  {
+    var type = "image"
+  }
+  if(resultrow.type==2)
+  {
+    var type = "product"
+  }
+  else {
+    var type= ""
+  }
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.name + "</td><<td>" + resultrow.collectionname + "</td><td>" + resultrow.videourl + "</td><td>" + type + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editbrand?id=');?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletebrand?id='); ?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

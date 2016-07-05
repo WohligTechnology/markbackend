@@ -9,9 +9,7 @@
 <th data-field="id">id</th>
 <th data-field="title">title</th>
 <th data-field="experience">experience</th>
-<th data-field="ctc">ctc</th>
-<th data-field="position">position</th>
-<th data-field="location">location</th>
+
 <th data-field="mailat">mailat</th>
 <th data-field="order">order</th>
 </tr>
@@ -27,7 +25,7 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.title + "</td><td>" + resultrow.experience + "</td><td>" + resultrow.ctc + "</td><td>" + resultrow.position + "</td><td>" + resultrow.location + "</td><td>" + resultrow.mailat + "</td><td>" + resultrow.order + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editcareers?id=');?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletecareers?id='); ?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.title + "</td><td>" + resultrow.experience + "</td><td>" + resultrow.mailat + "</td><td>" + resultrow.order + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editcareers?id=');?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletecareers?id='); ?>"+resultrow.id+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

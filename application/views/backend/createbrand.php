@@ -9,34 +9,39 @@
 <input type="text" id="name" name="name" value='<?php echo set_value('name');?>'>
 </div>
 </div>
-<div class="row">
+<div class="row"><label>about</label>
 <div class="input-field col s12">
-<textarea name="about" class="materialize-textarea" length="400"><?php echo set_value( 'about');?></textarea>
-<label>about</label>
+<textarea id="some-textarea" name="about" class="materialize-textarea" length="400"><?php echo set_value( 'about');?></textarea>
+
 </div>
 </div>
-<div class="row">
+<div class="row"><label>salonexp</label>
 <div class="input-field col s12">
-<textarea name="salonexp" class="materialize-textarea" length="400"><?php echo set_value( 'salonexp');?></textarea>
-<label>salonexp</label>
+<textarea id="some-textarea" name="salonexp" class="materialize-textarea" length="400"><?php echo set_value( 'salonexp');?></textarea>
+
 </div>
 </div>
 <div class="row">
-<div class="input-field col s6">
-<label for="mainimage">mainimage</label>
-<input type="text" id="mainimage" name="mainimage" value='<?php echo set_value('mainimage');?>'>
-</div>
-</div>
-<div class="row">
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Image</span>
+					<input name="image" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image');?>">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+    <div class="input-field col s6">
+    <label for="videourl">collectionname</label>
+    <input type="text" id="collectionname" name="collectionname" value='<?php echo set_value('collectionname');?>'>
+    </div>
+    </div>
+<div class="row"><label>content</label>
 <div class="input-field col s12">
-<textarea name="collectionname" class="materialize-textarea" length="400"><?php echo set_value( 'collectionname');?></textarea>
-<label>collectionname</label>
-</div>
-</div>
-<div class="row">
-<div class="input-field col s6">
-<label for="content">content</label>
-<input type="text" id="content" name="content" value='<?php echo set_value('content');?>'>
+<textarea id="some-textarea" name="content" class="materialize-textarea" length="400"><?php echo set_value( 'content');?></textarea>
+
 </div>
 </div>
 <div class="row">
@@ -45,10 +50,10 @@
 <input type="text" id="videourl" name="videourl" value='<?php echo set_value('videourl');?>'>
 </div>
 </div>
-<div class="row">
-<div class="input-field col s6">
-<label for="type">type</label>
-<input type="text" id="type" name="type" value='<?php echo set_value('type');?>'>
+<div class=" row" style="display:block">
+<div class=" input-field col s6">
+<?php echo form_dropdown("type",$type,set_value('type',$this->input->get('id')));?>
+<label>type</label>
 </div>
 </div>
 <div class="row">
