@@ -27,8 +27,8 @@
 <div class="row">
 			<div class="file-field input-field col m6 s12">
 				<span class="img-center big">
-								                    	<?php if($before->mainimage == "") { } else {
-									                    ?><img src="<?php echo base_url('uploads')."/".$before->mainimage; ?>">
+								                    	<?php if($before->image == "") { } else {
+									                    ?><img src="<?php echo base_url('uploads')."/".$before->image; ?>">
 															<?php } ?>
 															</span>
 				<div class="btn blue darken-4">
@@ -36,10 +36,11 @@
 					<input name="image" type="file" multiple>
 				</div>
 				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->mainimage);?>">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->image);?>">
 				</div>
-			</div><span style=" display: block;
-    padding-top: 30px;">640 X 410</span>
+			</div>
+			<!-- <span style=" display: block;
+    padding-top: 30px;">640 X 410</span> -->
 		</div>
     <div class="row">
     <div class="input-field col s6">

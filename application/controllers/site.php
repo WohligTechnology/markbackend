@@ -1251,20 +1251,22 @@ $this->load->view("redirect",$data);
 }
 public function editbrand()
 {
-$access=array("1");
-$this->checkaccess($access);
+// $access=array("1");
+// $this->checkaccess($access);
 // $data["page"]="editbrand";
 // $data["type"]=$this->brand_model->gettypedropdown();
 // $data["title"]="Edit brand";
 // $data["before"]=$this->brand_model->beforeedit($this->input->get("id"));
 // $this->load->view("template",$data);
+$access=array("1");
+$this->checkaccess($access);
 $data["page"]="editbrand";
-    $data["page2"]="block/brandblock";
-    $data["before1"]=$this->input->get('id');
+$data["page2"]="block/brandblock";
+$data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["before3"]=$this->input->get('id');
-$data["base_url"]=site_url("site/viewbrandjson?id=").$this->input->get('id');
-$data["title"]="View previousgamegallery";
+$data["title"]="Edit brand";
+$data["before"]=$this->brand_model->beforeedit($this->input->get("id"));
 $this->load->view("templatewith2",$data);
 }
 public function editbrandsubmit()
@@ -1451,12 +1453,23 @@ $this->load->view("redirect",$data);
 }
 public function viewbrandproducts()
 {
+// $access=array("1");
+// $this->checkaccess($access);
+// $data["page"]="viewbrandproducts";
+// $data["base_url"]=site_url("site/viewbrandproductsjson");
+// $data["title"]="View brandproducts";
+// $this->load->view("template",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewbrandproducts";
-$data["base_url"]=site_url("site/viewbrandproductsjson");
+$data["page2"]="block/brandblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["before4"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewbrandproductsjson?id=").$this->input->get('id');
 $data["title"]="View brandproducts";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewbrandproductsjson()
 {
@@ -1530,10 +1543,11 @@ $this->load->view("template",$data);
 else
 {
 $id=$this->input->get_post("id");
-$image=$this->input->get_post("image");
+// $image=$this->input->get_post("image");
 $name=$this->input->get_post("name");
 $content=$this->input->get_post("content");
 $order=$this->input->get_post("order");
+  $image=$this->menu_model->createImage();
 if($this->brandproducts_model->create($image,$name,$content,$order)==0)
 $data["alerterror"]="New brandproducts could not be created.";
 else
@@ -1571,10 +1585,11 @@ $this->load->view("template",$data);
 else
 {
 $id=$this->input->get_post("id");
-$image=$this->input->get_post("image");
+// $image=$this->input->get_post("image");
 $name=$this->input->get_post("name");
 $content=$this->input->get_post("content");
 $order=$this->input->get_post("order");
+  $image=$this->menu_model->createImage();
 if($this->brandproducts_model->edit($id,$image,$name,$content,$order)==0)
 $data["alerterror"]="New brandproducts could not be Updated.";
 else
