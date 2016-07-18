@@ -10,11 +10,49 @@
 </div>
 </div>
 <div class="row">
-<div class="input-field col s6">
-<label for="image">image</label>
-<input type="text" id="image" name="image" value='<?php echo set_value('image');?>'>
-</div>
-</div>
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Image 1</span>
+					<input name="image1" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image1');?>">
+				</div>
+			</div>
+		</div>
+<div class="row">
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Image 2</span>
+					<input name="image2" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image2');?>">
+				</div>
+			</div>
+		</div>
+<div class="row">
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Image 3</span>
+					<input name="image3" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image3');?>">
+				</div>
+			</div>
+		</div>
+<div class="row">
+			<div class="file-field input-field col m6 s12">
+				<div class="btn blue darken-4">
+					<span>Image 4</span>
+					<input name="image4" type="file" multiple>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image4');?>">
+				</div>
+			</div>
+		</div>
 <div class="row">
 <div class="input-field col s6">
 <label for="order">order</label>

@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class brandimages_model extends CI_Model
 {
-public function create($brand,$image,$order)
+public function create($brand,$image1,$image2,$image3,$image4,$order)
 {
-$data=array("brand" => $brand,"image" => $image,"order" => $order);
+$data=array("brand" => $brand,"image1" => $image1,"image2" => $image2,"image3" => $image3,"image4" => $image4,"order" => $order);
 $query=$this->db->insert( "mark_brandimages", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -48,7 +48,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `mark_brandimages` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `mark_brandimages` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"

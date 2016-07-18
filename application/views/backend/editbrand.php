@@ -27,8 +27,8 @@
 <div class="row">
 			<div class="file-field input-field col m6 s12">
 				<span class="img-center big">
-								                    	<?php if($before->image == "") { } else {
-									                    ?><img src="<?php echo base_url('uploads')."/".$before->image; ?>">
+								                    	<?php if($before->mainimage == "") { } else {
+									                    ?><img src="<?php echo base_url('uploads')."/".$before->mainimage; ?>">
 															<?php } ?>
 															</span>
 				<div class="btn blue darken-4">
@@ -36,7 +36,7 @@
 					<input name="image" type="file" multiple>
 				</div>
 				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->image);?>">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->mainimage);?>">
 				</div>
 			</div>
 			<!-- <span style=" display: block;
@@ -60,10 +60,10 @@
 <input type="text" id="videourl" name="videourl" value='<?php echo set_value('videourl',$before->videourl);?>'>
 </div>
 </div>
-<div class=" row" style="display:block">
+<div class=" row">
 <div class=" input-field col s6">
-<?php echo form_dropdown("type",$type,set_value('type',$this->input->get('id')));?>
-<label>type</label>
+<?php echo form_dropdown("type",$type,set_value('type',$before->type));?>
+<label>Type</label>
 </div>
 </div>
 <div class="row">

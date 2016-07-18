@@ -1251,13 +1251,6 @@ $this->load->view("redirect",$data);
 }
 public function editbrand()
 {
-// $access=array("1");
-// $this->checkaccess($access);
-// $data["page"]="editbrand";
-// $data["type"]=$this->brand_model->gettypedropdown();
-// $data["title"]="Edit brand";
-// $data["before"]=$this->brand_model->beforeedit($this->input->get("id"));
-// $this->load->view("template",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editbrand";
@@ -1265,6 +1258,7 @@ $data["page2"]="block/brandblock";
 $data["before1"]=$this->input->get('id');
 $data["before2"]=$this->input->get('id');
 $data["before3"]=$this->input->get('id');
+$data["type"]=$this->brand_model->gettypedropdown();
 $data["title"]="Edit brand";
 $data["before"]=$this->brand_model->beforeedit($this->input->get("id"));
 $this->load->view("templatewith2",$data);
@@ -1318,14 +1312,25 @@ $this->brand_model->delete($this->input->get("id"));
 $data["redirect"]="site/viewbrand";
 $this->load->view("redirect",$data);
 }
-public function viewbrandimages()
+public function ages()
 {
+// $access=array("1");
+// $this->checkaccess($access);
+// $data["page"]="viewbrandimages";
+// $data["base_url"]=site_url("site/viewbrandimagesjson");
+// $data["title"]="View brandimages";
+// $this->load->view("template",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewbrandimages";
-$data["base_url"]=site_url("site/viewbrandimagesjson");
+$data["page2"]="block/brandblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["before4"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewbrandimagesjson?id=").$this->input->get('id');
 $data["title"]="View brandimages";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewbrandimagesjson()
 {
@@ -1341,15 +1346,30 @@ $elements[1]->sort="1";
 $elements[1]->header="brand";
 $elements[1]->alias="brand";
 $elements[2]=new stdClass();
-$elements[2]->field="`mark_brandimages`.`image`";
+$elements[2]->field="`mark_brandimages`.`image1`";
 $elements[2]->sort="1";
-$elements[2]->header="image";
-$elements[2]->alias="image";
+$elements[2]->header="image1";
+$elements[2]->alias="image1";
 $elements[3]=new stdClass();
-$elements[3]->field="`mark_brandimages`.`order`";
+$elements[3]->field="`mark_brandimages`.`image2`";
 $elements[3]->sort="1";
-$elements[3]->header="order";
-$elements[3]->alias="order";
+$elements[3]->header="image2";
+$elements[3]->alias="image2";
+$elements[4]=new stdClass();
+$elements[4]->field="`mark_brandimages`.`image3`";
+$elements[4]->sort="1";
+$elements[4]->header="image3";
+$elements[4]->alias="image3";
+$elements[5]=new stdClass();
+$elements[5]->field="`mark_brandimages`.`image4`";
+$elements[5]->sort="1";
+$elements[5]->header="image4";
+$elements[5]->alias="image4";
+$elements[6]=new stdClass();
+$elements[6]->field="`mark_brandimages`.`order`";
+$elements[6]->sort="1";
+$elements[6]->header="order";
+$elements[6]->alias="order";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1394,9 +1414,36 @@ else
 {
 $id=$this->input->get_post("id");
 $brand=$this->input->get_post("brand");
-$image=$this->input->get_post("image");
+// $image=$this->input->get_post("image");
+$config['upload_path'] = './uploads/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$this->load->library('upload', $config);
+				$filename = 'image1';
+				$image1 = '';
+				if ($this->upload->do_upload($filename)) {
+						$uploaddata = $this->upload->data();
+						$image1 = $uploaddata['file_name'];
+				}
+				$filename = 'image2';
+				$image2 = '';
+				if ($this->upload->do_upload($filename)) {
+						$uploaddata = $this->upload->data();
+						$image2 = $uploaddata['file_name'];
+				}
+				$filename = 'image3';
+								$image3 = '';
+								if ($this->upload->do_upload($filename)) {
+										$uploaddata = $this->upload->data();
+										$image3 = $uploaddata['file_name'];
+								}
+								$filename = 'image4';
+								$image4 = '';
+								if ($this->upload->do_upload($filename)) {
+										$uploaddata = $this->upload->data();
+										$image4 = $uploaddata['file_name'];
+								}
 $order=$this->input->get_post("order");
-if($this->brandimages_model->create($brand,$image,$order)==0)
+if($this->brandimages_model->create($brand,$image1,$image2,$image3,$image4,$order)==0)
 $data["alerterror"]="New brandimages could not be created.";
 else
 $data["alertsuccess"]="brandimages created Successfully.";
@@ -1453,12 +1500,6 @@ $this->load->view("redirect",$data);
 }
 public function viewbrandproducts()
 {
-// $access=array("1");
-// $this->checkaccess($access);
-// $data["page"]="viewbrandproducts";
-// $data["base_url"]=site_url("site/viewbrandproductsjson");
-// $data["title"]="View brandproducts";
-// $this->load->view("template",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewbrandproducts";

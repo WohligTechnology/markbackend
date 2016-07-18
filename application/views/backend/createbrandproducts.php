@@ -4,6 +4,12 @@
 </div>
 <form class='col s12' method='post' action='<?php echo site_url("site/createbrandproductssubmit");?>' enctype= 'multipart/form-data'>
   <div class="row">
+     <div class="input-field col s12 m8">
+         <?php echo form_dropdown('brand', $brand, set_value('brand')); ?>
+          <label>Brand</label>
+     </div>
+  </div>
+  <div class="row">
   			<div class="file-field input-field col m6 s12">
   				<div class="btn blue darken-4">
   					<span>Image</span>
@@ -23,7 +29,6 @@
 <div class="row"><label>content</label>
 <div class="input-field col s12">
 <textarea id="some-textarea" name="content" class="materialize-textarea" length="400"><?php echo set_value( 'content');?></textarea>
-
 </div>
 </div>
 <div class="row">
