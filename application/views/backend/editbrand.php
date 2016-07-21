@@ -8,19 +8,19 @@
 <input type="hidden" id="normal-field" class="form-control" name="id" value="<?php echo set_value('id',$before->id);?>" style="display:none;">
 <div class="row">
 <div class="input-field col s6">
-<label for="name">name</label>
+<label for="name">Brand Name</label>
 <input type="text" id="name" name="name" value='<?php echo set_value('name',$before->name);?>'>
 </div>
 </div>
 <div class="row">
 <div class="col s12 m6">
-<label>about</label>
+<label>About</label>
 <textarea id="some-textarea" name="about" placeholder="Enter text ..."><?php echo set_value( 'about',$before->about);?></textarea>
 </div>
 </div>
 <div class="row">
 <div class="col s12 m6">
-<label>salonexp</label>
+<label>Salon Experience</label>
 <textarea id="some-textarea" name="salonexp" placeholder="Enter text ..."><?php echo set_value( 'salonexp',$before->salonexp);?></textarea>
 </div>
 </div>
@@ -44,19 +44,19 @@
 		</div>
     <div class="row">
     <div class="input-field col s6">
-    <label for="videourl">collectionname</label>
+    <label for="videourl">Collection Name</label>
     <input type="text" id="collectionname" name="collectionname" value='<?php echo set_value('collectionname',$before->collectionname);?>'>
     </div>
     </div>
 <div class="row">
 <div class="col s12 m6">
-<label>content</label>
+<label>Collection Content</label>
 <textarea id="some-textarea" name="content" placeholder="Enter text ..."><?php echo set_value( 'content',$before->content);?></textarea>
 </div>
 </div>
 <div class="row">
 <div class="input-field col s6">
-<label for="videourl">videourl</label>
+<label for="videourl">Video url</label>
 <input type="text" id="videourl" name="videourl" value='<?php echo set_value('videourl',$before->videourl);?>'>
 </div>
 </div>
