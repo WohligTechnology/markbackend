@@ -1314,20 +1314,21 @@ $this->load->view("redirect",$data);
 }
 public function viewbrandimages()
 {
-$access=array("1");
-$this->checkaccess($access);
-$data["page"]="viewbrandimages";
-$data["page2"]="block/brandblock";
-$data["before1"]=$this->input->get('id');
-$data["before2"]=$this->input->get('id');
-$data["before3"]=$this->input->get('id');
-$data["before4"]=$this->input->get('id');
-$data["base_url"]=site_url("site/viewbrandimagesjson?id=").$this->input->get('id');
-$data["title"]="View brandimages";
-$this->load->view("templatewith2",$data);
+	$access=array("1");
+	$this->checkaccess($access);
+	$data["page"]="viewbrandimages";
+	$data["page2"]="block/brandblock";
+	$data["before1"]=$this->input->get('id');
+	$data["before2"]=$this->input->get('id');
+	$data["before3"]=$this->input->get('id');
+	$data["before4"]=$this->input->get('id');
+	$data["base_url"]=site_url("site/viewbrandimagesjson?id=").$this->input->get('id');
+	$data["title"]="View brandproducts";
+	$this->load->view("templatewith2",$data);
 }
 function viewbrandimagesjson()
 {
+$id = $this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`mark_brandimages`.`id`";
@@ -1364,6 +1365,11 @@ $elements[6]->field="`mark_brandimages`.`order`";
 $elements[6]->sort="1";
 $elements[6]->header="order";
 $elements[6]->alias="order";
+$elements[7]=new stdClass();
+$elements[7]->field="`mark_brandimages`.`brand`";
+$elements[7]->sort="1";
+$elements[7]->header="brandid";
+$elements[7]->alias="brandid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1378,22 +1384,21 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `mark_brandimages`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `mark_brandimages`","WHERE `mark_brandimages`.`brand`='$id'");
 $this->load->view("json",$data);
 }
 
 public function createbrandimages()
 {
-$access=array("1");
-$this->checkaccess($access);
-$data["page"]="createbrandimages";
-$data["before1"]=$this->input->get('id');
-$data["before2"]=$this->input->get('id');
-$data["before3"]=$this->input->get('id');
-$data["before4"]=$this->input->get('id');
-$data["title"]="Create brandimages";
-// $this->load->view("template",$data);
-$this->load->view("templatewith2",$data);
+	$access=array("1");
+	$this->checkaccess($access);
+	$data["page"]="createbrandimages";
+	$data["before1"]=$this->input->get('id');
+	$data["before2"]=$this->input->get('id');
+	$data["before3"]=$this->input->get('id');
+	$data["brand"]=$this->brand_model->getdropdown();
+	$data["title"]="Create brandimages";
+	$this->load->view("template",$data);
 }
 public function createbrandimagessubmit()
 {
@@ -1446,8 +1451,10 @@ if($this->brandimages_model->create($brand,$image1,$image2,$image3,$image4,$orde
 $data["alerterror"]="New brandimages could not be created.";
 else
 $data["alertsuccess"]="brandimages created Successfully.";
-$data["redirect"]="site/viewbrandimages";
-$this->load->view("redirect",$data);
+// $data["redirect"]="site/viewbrandimages";
+// $this->load->view("redirect",$data);
+$data["redirect"]="site/viewbrandimages?id=".$brand;
+$this->load->view("redirect2",$data);
 }
 }
 public function editbrandimages()
@@ -1456,6 +1463,7 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editbrandimages";
 $data["title"]="Edit brandimages";
+$data["brand"]=$this->brand_model->getdropdown();
 $data["before"]=$this->brandimages_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
 }
@@ -1479,14 +1487,64 @@ else
 {
 $id=$this->input->get_post("id");
 $brand=$this->input->get_post("brand");
-$image=$this->input->get_post("image");
+// $image=$this->input->get_post("image");
+$config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $this->load->library('upload', $config);
+            $filename = 'image1';
+            $image1 = '';
+            if ($this->upload->do_upload($filename)) {
+                $uploaddata = $this->upload->data();
+                $image1 = $uploaddata['file_name'];
+            }
+            if ($image1 == '') {
+                $image1 = $this->brandimages_model->getimage1byid($id);
+                    // print_r($image);
+                     $image1 = $image1->image1;
+            }
+            $filename = 'image2';
+            $image2 = '';
+            if ($this->upload->do_upload($filename)) {
+                $uploaddata = $this->upload->data();
+                $image2 = $uploaddata['file_name'];
+            }
+            if ($image2 == '') {
+                $image2 = $this->brandimages_model->getimage2byid($id);
+                    // print_r($image);
+                     $image2 = $image2->image2;
+            }
+						            $filename = 'image3';
+						            $image3 = '';
+						            if ($this->upload->do_upload($filename)) {
+						                $uploaddata = $this->upload->data();
+						                $image3 = $uploaddata['file_name'];
+						            }
+						            if ($image3 == '') {
+						                $image3 = $this->brandimages_model->getimage3byid($id);
+						                    // print_r($image);
+						                     $image3 = $image3->image3;
+						            }
+						            $filename = 'image4';
+						            $image4 = '';
+						            if ($this->upload->do_upload($filename)) {
+						                $uploaddata = $this->upload->data();
+						                $image4 = $uploaddata['file_name'];
+						            }
+						            if ($image4 == '') {
+						                $image4 = $this->brandimages_model->getimage4byid($id);
+						                    // print_r($image);
+						                     $image4 = $image4->image4;
+						            }
+
 $order=$this->input->get_post("order");
-if($this->brandimages_model->edit($id,$brand,$image,$order)==0)
+if($this->brandimages_model->edit($id,$brand,$image1,$image2,$image3,$image4,$order)==0)
 $data["alerterror"]="New brandimages could not be Updated.";
 else
 $data["alertsuccess"]="brandimages Updated Successfully.";
-$data["redirect"]="site/viewbrandimages";
-$this->load->view("redirect",$data);
+// $data["redirect"]="site/viewbrandimages";
+// $this->load->view("redirect",$data);
+$data["redirect"]="site/viewbrandimages?id=".$brand;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletebrandimages()
@@ -1494,8 +1552,10 @@ public function deletebrandimages()
 $access=array("1");
 $this->checkaccess($access);
 $this->brandimages_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewbrandimages";
-$this->load->view("redirect",$data);
+// $data["redirect"]="site/viewbrandimages";
+// $this->load->view("redirect",$data);
+$data["redirect"]="site/viewbrandimages?id=".$this->input->get("brandid");
+$this->load->view("redirect2",$data);
 }
 public function viewbrandproducts()
 {
@@ -1540,11 +1600,11 @@ $elements[4]->field="`mark_brandproducts`.`order`";
 $elements[4]->sort="1";
 $elements[4]->header="order";
 $elements[4]->alias="order";
-$elements[4]=new stdClass();
-$elements[4]->field="`mark_brandproducts`.`brand`";
-$elements[4]->sort="1";
-$elements[4]->header="brandid";
-$elements[4]->alias="brandid";
+$elements[5]=new stdClass();
+$elements[5]->field="`mark_brandproducts`.`brand`";
+$elements[5]->sort="1";
+$elements[5]->header="brandid";
+$elements[5]->alias="brandid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");

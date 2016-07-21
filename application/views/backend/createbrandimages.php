@@ -3,12 +3,12 @@
 <h4 class="pad-left-15 capitalize">Create brandimages</h4>
 </div>
 <form class='col s12' method='post' action='<?php echo site_url("site/createbrandimagessubmit");?>' enctype= 'multipart/form-data'>
-<div class="row">
-<div class="input-field col s6">
-<label for="brand">brand</label>
-<input type="text" id="brand" name="brand" value='<?php echo set_value('brand');?>'>
-</div>
-</div>
+	<div class="row" style="display:none">
+             <div class="input-field col s12 m8">
+                 <?php echo form_dropdown('brand', $brand, set_value('brand',$this->input->get("id"))); ?>
+                  <label> Brand</label>
+             </div>
+         </div>
 <div class="row">
 			<div class="file-field input-field col m6 s12">
 				<div class="btn blue darken-4">
@@ -62,7 +62,7 @@
 <div class="row">
 <div class="col s12 m6">
 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>
-<a href="<?php echo site_url("site/viewbrandimages"); ?>" class="btn btn-secondary waves-effect waves-light red">Cancel</a>
+<a href="<?php echo site_url("site/viewbrandimages?id=").$this->input->get("id");?>" class="waves-effect waves-light btn red">Cancel</a>
 </div>
 </div>
 </form>

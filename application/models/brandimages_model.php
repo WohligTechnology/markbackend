@@ -24,14 +24,29 @@ $this->db->where("id",$id);
 $query=$this->db->get("mark_brandimages")->row();
 return $query;
 }
-public function edit($id,$brand,$image,$order)
+public function edit($id,$brand,$image1,$image2,$image3,$image4,$order)
 {
-if($image=="")
+if($image1=="")
 {
-$image=$this->brandimages_model->getimagebyid($id);
-$image=$image->image;
+$image1=$this->brandimage1s_model->getimage1byid($id);
+$image1=$image1->image1;
 }
-$data=array("brand" => $brand,"image" => $image,"order" => $order);
+if($image4=="")
+{
+$image4=$this->brandimage4s_model->getimage4byid($id);
+$image4=$image4->image4;
+}
+if($image2=="")
+{
+$image2=$this->brandimage2s_model->getimage2byid($id);
+$image2=$image2->image2;
+}
+if($image3=="")
+{
+$image3=$this->brandimage3s_model->getimage3byid($id);
+$image3=$image3->image3;
+}
+$data=array("brand" => $brand,"image1" => $image1,"image2" => $image2,"image3" => $image3,"image4" => $image4,"order" => $order);
 $this->db->where( "id", $id );
 $query=$this->db->update( "mark_brandimages", $data );
 return 1;
@@ -41,9 +56,24 @@ public function delete($id)
 $query=$this->db->query("DELETE FROM `mark_brandimages` WHERE `id`='$id'");
 return $query;
 }
-public function getimagebyid($id)
+public function getimage1byid($id)
 {
-$query=$this->db->query("SELECT `image` FROM `mark_brandimages` WHERE `id`='$id'")->row();
+$query=$this->db->query("SELECT `image1` FROM `mark_brandimages` WHERE `id`='$id'")->row();
+return $query;
+}
+public function getimage2byid($id)
+{
+$query=$this->db->query("SELECT `image2` FROM `mark_brandimages` WHERE `id`='$id'")->row();
+return $query;
+}
+public function getimage3byid($id)
+{
+$query=$this->db->query("SELECT `image3` FROM `mark_brandimages` WHERE `id`='$id'")->row();
+return $query;
+}
+public function getimage4byid($id)
+{
+$query=$this->db->query("SELECT `image4` FROM `mark_brandimages` WHERE `id`='$id'")->row();
 return $query;
 }
 public function getdropdown()
