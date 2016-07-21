@@ -902,6 +902,7 @@ public function createmedia()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createmedia";
+$data["type"]=$this->media_model->gettypedropdown();
 $data["title"]="Create media";
 $this->load->view("template",$data);
 }
@@ -923,10 +924,11 @@ $this->load->view("template",$data);
 else
 {
 $id=$this->input->get_post("id");
-$image=$this->input->get_post("image");
+// $image=$this->input->get_post("image");
 $order=$this->input->get_post("order");
 $status=$this->input->get_post("status");
 $type=$this->input->get_post("type");
+$image=$this->menu_model->createImage();
 if($this->media_model->create($image,$order,$status,$type)==0)
 $data["alerterror"]="New media could not be created.";
 else
@@ -940,6 +942,7 @@ public function editmedia()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editmedia";
+$data["type"]=$this->media_model->gettypedropdown();
 $data["title"]="Edit media";
 $data["before"]=$this->media_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);

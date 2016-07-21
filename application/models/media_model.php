@@ -48,7 +48,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `mark_media` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `mark_media` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"
@@ -57,6 +57,18 @@ foreach($query as $row)
 {
 $return[$row->id]=$row->name;
 }
+return $return;
+}
+
+public function gettypedropdown()
+{
+
+$return=array(
+"" => "Select type",
+"1" => "HAIR & MAKEUP",
+"2" => "EDITORIALS"
+);
+
 return $return;
 }
 }
