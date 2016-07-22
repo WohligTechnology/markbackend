@@ -39,7 +39,7 @@
 <div class="row">
 <div class="col s12 m6">
 <label>content</label>
-<textarea name="content" placeholder="Enter text ..."><?php echo set_value( 'content',$before->content);?></textarea>
+<textarea id="some-textarea" name="content" placeholder="Enter text ..."><?php echo set_value( 'content',$before->content);?></textarea>
 </div>
 </div>
 <div class="row">

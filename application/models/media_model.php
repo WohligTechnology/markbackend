@@ -71,5 +71,19 @@ $return=array(
 
 return $return;
 }
+
+public function getMedia($type)
+{
+  if(!empty($type))
+  {
+    $query = $this->db->query("SELECT `id`, `image` FROM `mark_media` WHERE `type`='$type' ORDER BY `order`")->result();
+    return $query;
+  }
+  else {
+  $obj = new stdClass();
+  $obj->value = "Please Enter type";
+  return $obj;
+  }
+}
 }
 ?>

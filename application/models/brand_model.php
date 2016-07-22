@@ -61,7 +61,6 @@ return $return;
 }
 public function gettypedropdown()
 {
-
 $return=array(
 "" => "Select type",
 "1" => "Image",
@@ -69,6 +68,35 @@ $return=array(
 );
 
 return $return;
+}
+
+public function getAllBrands()
+{
+  $query = $this->db->query("SELECT `id`, `name` FROM `mark_brand` WHERE 1")->result();
+  return $query;
+}
+public function getBrand($id)
+{
+  if(!empty($id))
+  {
+    $query = $this->db->query("SELECT `id`, `name`, `about`, `salonexp`, `mainimage`, `collectionname`, `content`, `videourl`, `type` FROM `mark_brand` WHERE `id`='$id'")->row();
+    if($query->type == 1)
+    {
+      //image
+      $query->images= $this->db->query("SELECT `id`, `brand`, `image1`, `order`, `image2`, `image3`, `image4` FROM `mark_brandimages` WHERE `brand`='$id' ORDER BY `order`")->result();
+    }
+  if($query->type == 2){
+    // Product
+    $query->products= $this->db->query("SELECT `id`, `brand`, `image`, `name`, `content`, `order` FROM `mark_brandproducts` WHERE `brand`='$id' ORDER BY `order`")->result();
+    }
+    return $query;
+  }
+  else {
+  $obj = new stdClass();
+  $obj->value = "Please Enter Brand Id";
+  return $obj;
+  }
+
 }
 }
 ?>

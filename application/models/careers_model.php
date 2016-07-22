@@ -46,9 +46,16 @@ public function getimagebyid($id)
 $query=$this->db->query("SELECT `image` FROM `mark_careers` WHERE `id`='$id'")->row();
 return $query;
 }
+
+public function getAllCareer()
+{
+  $query = $this->db->query("SELECT `id`, `title`, `experience`, `ctc`, `position`, `location`, `mailat`, `order` FROM `mark_careers` WHERE 1")->result();
+  return $query;
+}
+
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `mark_careers` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `mark_careers` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"

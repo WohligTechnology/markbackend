@@ -1,5 +1,5 @@
 <?php if ( ! defined("BASEPATH")) exit("No direct script access allowed");
-class Json extends CI_Controller 
+class Json extends CI_Controller
 {function getallcareers()
 {
 $elements=array();
@@ -434,4 +434,34 @@ $id=$this->input->get_post("id");
 $data["message"]=$this->brandproducts_model->getsinglebrandproducts($id);
 $this->load->view("json",$data);
 }
+
+public function getAllBrands()
+{
+$data["message"]=$this->brand_model->getAllBrands();
+$this->load->view("json",$data);
+}
+public function getOverview()
+{
+$data["message"]=$this->overview_model->getOverview();
+$this->load->view("json",$data);
+}
+public function getAllCareer()
+{
+$data["message"]=$this->careers_model->getAllCareer();
+$this->load->view("json",$data);
+}
+public function getBrand()
+{
+$id=$this->input->get_post("id");
+$data["message"]=$this->brand_model->getBrand($id);
+$this->load->view("json",$data);
+}
+public function getMedia()
+{
+$type=$this->input->get_post("type");
+$data["message"]=$this->media_model->getMedia($type);
+$this->load->view("json",$data);
+}
+
+
 } ?>

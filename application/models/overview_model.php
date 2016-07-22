@@ -48,7 +48,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `mark_overview` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `mark_overview` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"
@@ -58,6 +58,12 @@ foreach($query as $row)
 $return[$row->id]=$row->name;
 }
 return $return;
+}
+
+public function getOverview()
+{
+  $query = $this->db->query("SELECT `id`, `content` FROM `mark_overview` WHERE 1")->result();
+  return $query;
 }
 }
 ?>
