@@ -27,8 +27,8 @@
 					<input class="file-path validate" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image',$before->image);?>">
 				</div>
 			</div>
-      <!-- <span style=" display: block;
-    padding-top: 30px;">640 X 410</span> -->
+      <span style=" display: block;
+    padding-top: 30px;">400px X 224px</span>
 		</div>
 <div class="row">
 <div class="input-field col s6">

@@ -48,7 +48,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `mark_contactus` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `mark_contactus` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"
@@ -58,6 +58,23 @@ foreach($query as $row)
 $return[$row->id]=$row->name;
 }
 return $return;
+}
+
+public function contactSubmit($name, $telephone, $email, $message)
+{
+  if(!empty($email))
+  {
+    $this->db->query("INSERT INTO `mark_contactus`(`name`,`email`,`phone`,`message`) VALUE('$name','$email','$telephone','$message')");
+    $object = new stdClass();
+    $object->value = true;
+  }
+  else
+   {
+    $object = new stdClass();
+    $object->value = false;
+    $object->message = "Please Enter Email";
+    }
+    return $object;
 }
 }
 ?>

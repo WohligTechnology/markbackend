@@ -28,9 +28,9 @@
 				<div class="file-path-wrapper">
 					<input class="file-path validate image11" type="text" placeholder="Upload one or more files" value="<?php echo set_value('image1', $before->image1);?>">
 				</div>
-<!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
 			</div>
-
+      <span style=" display: block;
+    padding-top: 30px;">355px X 431px</span>
 		</div>
     <div class="row">
 			<div class="file-field input-field col m6 s12">
@@ -50,8 +50,11 @@
 				</div>
 <!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
 			</div>
+      <span style=" display: block;
+    padding-top: 30px;">355px X 487px</span>
+		</div>
 
-		</div><div class="row">
+    <div class="row">
     			<div class="file-field input-field col m6 s12">
     				<span class="img-center big image3">
                        			<?php if ($before->image3 == '') {
@@ -69,7 +72,8 @@
     				</div>
     <!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
     			</div>
-
+          <span style=" display: block;
+        padding-top: 30px;">544px X 521px</span>
     		</div>
         <div class="row">
     			<div class="file-field input-field col m6 s12">
@@ -89,7 +93,8 @@
     				</div>
     <!--				<div class="md4"><a class="waves-effect waves-light btn red clearimg input-field ">Clear Image</a></div>-->
     			</div>
-
+          <span style=" display: block;
+        padding-top: 30px;">544px X 391px</span>
     		</div>
 <div class="row">
 <div class="input-field col s6">

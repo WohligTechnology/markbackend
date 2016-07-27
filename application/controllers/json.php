@@ -463,5 +463,16 @@ $data["message"]=$this->media_model->getMedia($type);
 $this->load->view("json",$data);
 }
 
+public function contactSubmit()
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    $name = $data['name'];
+    $email = $data['email'];
+    $telephone = $data['telephone'];
+    $message = $data['message'];
+    $data['message'] = $this->contactus_model->contactSubmit($name, $telephone, $email, $message);
+    $this->load->view('json', $data);
+}
+
 
 } ?>
