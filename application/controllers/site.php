@@ -1729,5 +1729,308 @@ $data["redirect"]="site/viewbrandproducts?id=".$this->input->get("brandid");
 $this->load->view("redirect2",$data);
 }
 
+
+public function viewbrandlocation()
+{
+$access=array("1");
+$data["page"]="viewbrandlocation";
+$data["page2"]="block/locationblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["before4"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewbrandlocationjson?id=").$this->input->get('id');
+$data["title"]="View brandlocations";
+$this->load->view("templatewith2",$data);
+}
+function viewbrandlocationjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`location_brandlocation`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="id";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`location_brandlocation`.`brand`";
+$elements[1]->sort="1";
+$elements[1]->header="brand";
+$elements[1]->alias="brand";
+$elements[2]=new stdClass();
+$elements[2]->field="`location_brandlocation`.`location`";
+$elements[2]->sort="1";
+$elements[2]->header="location";
+$elements[2]->alias="location";
+$elements[3]=new stdClass();
+$elements[3]->field="`location_brandlocation`.`order`";
+$elements[3]->sort="1";
+$elements[3]->header="order";
+$elements[3]->alias="order";
+$elements[4]=new stdClass();
+$elements[4]->field="`mark_brand`.`name`";
+$elements[4]->sort="1";
+$elements[4]->header="brandname";
+$elements[4]->alias="brandname";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `location_brandlocation` LEFT OUTER JOIN `mark_brand` ON `location_brandlocation`.`brand`=`mark_brand`.`id`");
+$this->load->view("json",$data);
+}
+
+public function createbrandlocation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createbrandlocation";
+$data["brand"]=$this->brand_model->getdropdown();
+$data["title"]="Create brandlocation";
+$this->load->view("template",$data);
+}
+public function createbrandlocationsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("brand","brand","trim");
+$this->form_validation->set_rules("location","location","trim");
+$this->form_validation->set_rules("order","order","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createbrandlocation";
+$data["title"]="Create brandlocation";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$brand=$this->input->get_post("brand");
+$location=$this->input->get_post("location");
+$order=$this->input->get_post("order");
+if($this->brandlocation_model->create($brand,$location,$order)==0)
+$data["alerterror"]="New brandlocation could not be created.";
+else
+$data["alertsuccess"]="brandlocation created Successfully.";
+$data["redirect"]="site/viewbrandlocation";
+$this->load->view("redirect",$data);
+}
+}
+public function editbrandlocation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editbrandlocation";
+$data["page2"]="block/locationblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["brand"]=$this->brand_model->getdropdown();
+$data["title"]="Edit brandlocation";
+$data["before"]=$this->brandlocation_model->beforeedit($this->input->get("id"));
+$this->load->view("templatewith2",$data);
+}
+public function editbrandlocationsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","id","trim");
+$this->form_validation->set_rules("brand","brand","trim");
+$this->form_validation->set_rules("location","location","trim");
+$this->form_validation->set_rules("order","order","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editbrandlocation";
+$data["title"]="Edit brandlocation";
+$data["before"]=$this->brandlocation_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$brand=$this->input->get_post("brand");
+$location=$this->input->get_post("location");
+$order=$this->input->get_post("order");
+if($this->brandlocation_model->edit($id,$brand,$location,$order)==0)
+$data["alerterror"]="New brandlocation could not be Updated.";
+else
+$data["alertsuccess"]="brandlocation Updated Successfully.";
+$data["redirect"]="site/viewbrandlocation";
+$this->load->view("redirect",$data);
+}
+}
+public function deletebrandlocation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->brandlocation_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewbrandlocation";
+$this->load->view("redirect",$data);
+}
+public function viewlocationimage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewlocationimage";
+$data["page2"]="block/locationblock";
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["before4"]=$this->input->get('id');
+$data["base_url"]=site_url("site/viewlocationimagejson?id=").$this->input->get('id');
+$data["title"]="View locationimage";
+$this->load->view("templatewith2",$data);
+}
+function viewlocationimagejson()
+{
+$elements=array();
+$id = $this->input->get('id');
+$elements[0]=new stdClass();
+$elements[0]->field="`location_locationimage`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="id";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`location_locationimage`.`location`";
+$elements[1]->sort="1";
+$elements[1]->header="location";
+$elements[1]->alias="location";
+$elements[2]=new stdClass();
+$elements[2]->field="`location_locationimage`.`image`";
+$elements[2]->sort="1";
+$elements[2]->header="image";
+$elements[2]->alias="image";
+$elements[3]=new stdClass();
+$elements[3]->field="`location_locationimage`.`order`";
+$elements[3]->sort="1";
+$elements[3]->header="order";
+$elements[3]->alias="order";
+$elements[4]=new stdClass();
+$elements[4]->field="`location_locationimage`.`location`";
+$elements[4]->sort="1";
+$elements[4]->header="locationid";
+$elements[4]->alias="locationid";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `location_locationimage`","WHERE `location_locationimage`.`location`='$id'");
+$this->load->view("json",$data);
+}
+
+public function createlocationimage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["before1"]=$this->input->get('id');
+$data["before2"]=$this->input->get('id');
+$data["before3"]=$this->input->get('id');
+$data["location"]=$this->brandlocation_model->getdropdown();
+$data["page"]="createlocationimage";
+$data["title"]="Create locationimage";
+$this->load->view("template",$data);
+}
+public function createlocationimagesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("location","location","trim");
+$this->form_validation->set_rules("image","image","trim");
+$this->form_validation->set_rules("order","order","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createlocationimage";
+$data["title"]="Create locationimage";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$location=$this->input->get_post("location");
+// $image=$this->input->get_post("image");
+$image=$this->menu_model->createImage();
+$order=$this->input->get_post("order");
+if($this->locationimage_model->create($location,$image,$order)==0)
+$data["alerterror"]="New locationimage could not be created.";
+else
+$data["alertsuccess"]="locationimage created Successfully.";
+$data["redirect"]="site/viewlocationimage?id=".$location;
+$this->load->view("redirect2",$data);
+}
+}
+public function editlocationimage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editlocationimage";
+$data["title"]="Edit locationimage";
+$data["location"]=$this->brandlocation_model->getdropdown();
+$data["before"]=$this->locationimage_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editlocationimagesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","id","trim");
+$this->form_validation->set_rules("location","location","trim");
+$this->form_validation->set_rules("image","image","trim");
+$this->form_validation->set_rules("order","order","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editlocationimage";
+$data["title"]="Edit locationimage";
+$data["before"]=$this->locationimage_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$location=$this->input->get_post("location");
+// $image=$this->input->get_post("image");
+$image=$this->menu_model->createImage();
+$order=$this->input->get_post("order");
+if($this->locationimage_model->edit($id,$location,$image,$order)==0)
+$data["alerterror"]="New locationimage could not be Updated.";
+else
+$data["alertsuccess"]="locationimage Updated Successfully.";
+$data["redirect"]="site/viewlocationimage?id=".$location;
+$this->load->view("redirect2",$data);
+}
+}
+public function deletelocationimage()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->locationimage_model->delete($this->input->get("id"));
+// $data["redirect"]="site/viewlocationimage";
+// $this->load->view("redirect",$data);
+$data["redirect"]="site/viewlocationimage?id=".$this->input->get("locationid");
+$this->load->view("redirect2",$data);
+}
+
 }
 ?>
