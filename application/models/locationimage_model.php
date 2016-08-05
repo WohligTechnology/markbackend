@@ -48,7 +48,7 @@ return $query;
 }
 public function getdropdown()
 {
-$query=$this->db->query("SELECT * FROM `location_locationimage` ORDER BY `id` 
+$query=$this->db->query("SELECT * FROM `location_locationimage` ORDER BY `id`
                     ASC")->result();
 $return=array(
 "" => "Select Option"
