@@ -7,7 +7,7 @@
 <thead>
 <tr>
 <th data-field="id">id</th>
-<th data-field="location">location</th>
+<th data-field="locationname">locationname</th>
 <th data-field="image">image</th>
 <th data-field="order">order</th>
 </tr>
@@ -23,7 +23,7 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.location + "</td><td>" + resultrow.image + "</td><td>" + resultrow.order + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editlocationimage?id=');?>"+resultrow.id+"&locationid="+resultrow.locationid+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletelocationimage?id='); ?>"+resultrow.id+"&locationid="+resultrow.locationid+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.locationname + "</td><td><div class='design-imgholder'><img src='<?php echo base_url("uploads");?>/"+ resultrow.image +"'</div></td><td>" + resultrow.order + "</td><td><a class='btn btn-primary btn-xs waves-effect waves-light blue darken-4 z-depth-0 less-pad' href='<?php echo site_url('site/editlocationimage?id=');?>"+resultrow.id+"&locationid="+resultrow.locationid+"' data-position='top' data-delay='50' data-tooltip='Edit'><i class='fa fa-pencil propericon'></i></a><a class='btn btn-danger btn-xs waves-effect waves-light red pad10 z-depth-0 less-pad' onclick=\"return confirm('Are you sure you want to delete?');\") href='<?php echo site_url('site/deletelocationimage?id='); ?>"+resultrow.id+"&locationid="+resultrow.locationid+"' data-position='top' data-delay='50' data-tooltip='Delete'><i class='material-icons propericon'>delete</i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

@@ -1733,15 +1733,20 @@ $this->load->view("redirect2",$data);
 public function viewbrandlocation()
 {
 $access=array("1");
+// $data["page"]="viewbrandlocation";
+// $data["page2"]="block/locationblock";
+// $data["before1"]=$this->input->get('id');
+// $data["before2"]=$this->input->get('id');
+// $data["before3"]=$this->input->get('id');
+// $data["before4"]=$this->input->get('id');
+// $data["base_url"]=site_url("site/viewbrandlocationjson?id=").$this->input->get('id');
+// $data["title"]="View brandlocations";
+// $this->load->view("templatewith2",$data);
+
 $data["page"]="viewbrandlocation";
-$data["page2"]="block/locationblock";
-$data["before1"]=$this->input->get('id');
-$data["before2"]=$this->input->get('id');
-$data["before3"]=$this->input->get('id');
-$data["before4"]=$this->input->get('id');
-$data["base_url"]=site_url("site/viewbrandlocationjson?id=").$this->input->get('id');
-$data["title"]="View brandlocations";
-$this->load->view("templatewith2",$data);
+$data["base_url"]=site_url("site/viewbrandlocationjson");
+$data["title"]="View location";
+$this->load->view("template",$data);
 }
 function viewbrandlocationjson()
 {
@@ -1921,6 +1926,11 @@ $elements[4]->field="`location_locationimage`.`location`";
 $elements[4]->sort="1";
 $elements[4]->header="locationid";
 $elements[4]->alias="locationid";
+$elements[5]=new stdClass();
+$elements[5]->field="`location_brandlocation`.`location`";
+$elements[5]->sort="1";
+$elements[5]->header="locationname";
+$elements[5]->alias="locationname";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -1935,7 +1945,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `location_locationimage`","WHERE `location_locationimage`.`location`='$id'");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `location_locationimage` LEFT OUTER JOIN `location_brandlocation` ON `location_locationimage`.`location`=`location_brandlocation`.`id`","WHERE `location_locationimage`.`location`='$id'");
 $this->load->view("json",$data);
 }
 
