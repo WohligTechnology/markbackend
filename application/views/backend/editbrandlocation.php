@@ -26,7 +26,7 @@
 </div>
 <div class="row"><label>Address</label>
 <div class="input-field col s12">
-<textarea id="some-textarea" name="address" class="materialize-textarea" length="400"><?php echo set_value( 'address');?></textarea>
+<textarea id="some-textarea" name="address" class="materialize-textarea" length="400"><?php echo set_value( 'address',$before->address);?></textarea>
 </div>
 </div>
 <div class="row">

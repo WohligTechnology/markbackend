@@ -68,7 +68,7 @@ public function franchiseSubmit($name, $telephone, $email, $company,$franchise)
   Franchise For : $franchise
     </p>
   </div></body></html>";
-    // $this->email_model->emailer($msg,'Franchise Form Submission',$email,'');
+    $this->email_model->emailer($msg,'Franchise Form Submission',$email,'');
     $object = new stdClass();
     $object->value = true;
   }

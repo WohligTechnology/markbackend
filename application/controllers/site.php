@@ -1822,7 +1822,9 @@ $id=$this->input->get_post("id");
 $brand=$this->input->get_post("brand");
 $location=$this->input->get_post("location");
 $order=$this->input->get_post("order");
-if($this->brandlocation_model->create($brand,$location,$order)==0)
+$address=$this->input->get_post("address");
+$contact=$this->input->get_post("contact");
+if($this->brandlocation_model->create($brand,$location,$order,$address,$contact)==0)
 $data["alerterror"]="New brandlocation could not be created.";
 else
 $data["alertsuccess"]="brandlocation created Successfully.";
@@ -1865,8 +1867,10 @@ else
 $id=$this->input->get_post("id");
 $brand=$this->input->get_post("brand");
 $location=$this->input->get_post("location");
+$address=$this->input->get_post("address");
+$contact=$this->input->get_post("contact");
 $order=$this->input->get_post("order");
-if($this->brandlocation_model->edit($id,$brand,$location,$order)==0)
+if($this->brandlocation_model->edit($id,$brand,$location,$order,$address,$contact)==0)
 $data["alerterror"]="New brandlocation could not be Updated.";
 else
 $data["alertsuccess"]="brandlocation Updated Successfully.";

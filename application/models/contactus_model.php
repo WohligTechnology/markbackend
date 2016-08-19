@@ -67,7 +67,7 @@ public function contactSubmit($name, $telephone, $email, $message)
   Comment : $message
     </p>
   </div></body></html>";
-    // $this->email_model->emailer($msg,'Contact Form Submission',$email,'');
+    $this->email_model->emailer($msg,'Contact Form Submission',$email,'');
     $object = new stdClass();
     $object->value = true;
   }
