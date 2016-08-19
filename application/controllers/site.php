@@ -2046,5 +2046,155 @@ $data["redirect"]="site/viewlocationimage?id=".$this->input->get("locationid");
 $this->load->view("redirect2",$data);
 }
 
+public function viewfranchise()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewfranchise";
+$data["base_url"]=site_url("site/viewfranchisejson");
+$data["title"]="View franchise";
+$this->load->view("template",$data);
+}
+function viewfranchisejson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`mark_franchise`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="id";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`mark_franchise`.`name`";
+$elements[1]->sort="1";
+$elements[1]->header="name";
+$elements[1]->alias="name";
+$elements[2]=new stdClass();
+$elements[2]->field="`mark_franchise`.`email`";
+$elements[2]->sort="1";
+$elements[2]->header="email";
+$elements[2]->alias="email";
+$elements[3]=new stdClass();
+$elements[3]->field="`mark_franchise`.`phone`";
+$elements[3]->sort="1";
+$elements[3]->header="phone";
+$elements[3]->alias="phone";
+$elements[4]=new stdClass();
+$elements[4]->field="`mark_franchise`.`franchise`";
+$elements[4]->sort="1";
+$elements[4]->header="franchise";
+$elements[4]->alias="franchise";
+$elements[5]=new stdClass();
+$elements[5]->field="`mark_franchise`.`company`";
+$elements[5]->sort="1";
+$elements[5]->header="company";
+$elements[5]->alias="company";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `mark_franchise`");
+$this->load->view("json",$data);
+}
+
+public function createfranchise()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createfranchise";
+$data["title"]="Create franchise";
+$this->load->view("template",$data);
+}
+public function createfranchisesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("name","name","trim");
+$this->form_validation->set_rules("email","email","trim");
+$this->form_validation->set_rules("phone","phone","trim");
+$this->form_validation->set_rules("message","message","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createfranchise";
+$data["title"]="Create franchise";
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$name=$this->input->get_post("name");
+$email=$this->input->get_post("email");
+$telephone=$this->input->get_post("phone");
+$company=$this->input->get_post("company");
+$franchise=$this->input->get_post("franchise");
+if($this->franchise_model->create($name, $telephone, $email, $company,$franchise)==0)
+$data["alerterror"]="New franchise could not be created.";
+else
+$data["alertsuccess"]="franchise created Successfully.";
+$data["redirect"]="site/viewfranchise";
+$this->load->view("redirect",$data);
+}
+}
+public function editfranchise()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editfranchise";
+$data["title"]="Edit franchise";
+$data["before"]=$this->franchise_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editfranchisesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","id","trim");
+$this->form_validation->set_rules("name","name","trim");
+$this->form_validation->set_rules("email","email","trim");
+$this->form_validation->set_rules("phone","phone","trim");
+$this->form_validation->set_rules("message","message","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editfranchise";
+$data["title"]="Edit franchise";
+$data["before"]=$this->franchise_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$name=$this->input->get_post("name");
+$email=$this->input->get_post("email");
+$telephone=$this->input->get_post("phone");
+$company=$this->input->get_post("company");
+$franchise=$this->input->get_post("franchise");
+if($this->franchise_model->edit($id,$name, $telephone, $email, $company,$franchise)==0)
+$data["alerterror"]="New franchise could not be Updated.";
+else
+$data["alertsuccess"]="franchise Updated Successfully.";
+$data["redirect"]="site/viewfranchise";
+$this->load->view("redirect",$data);
+}
+}
+public function deletefranchise()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->franchise_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewfranchise";
+$this->load->view("redirect",$data);
+}
+
 }
 ?>

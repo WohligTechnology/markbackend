@@ -473,6 +473,17 @@ public function contactSubmit()
     $data['message'] = $this->contactus_model->contactSubmit($name, $telephone, $email, $message);
     $this->load->view('json', $data);
 }
+public function franchiseSubmit()
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    $name = $data['name'];
+    $email = $data['email'];
+    $telephone = $data['telephone'];
+    $company = $data['company'];
+    $franchise = $data['franchise'];
+    $data['message'] = $this->franchise_model->franchiseSubmit($name, $telephone, $email, $company,$franchise);
+    $this->load->view('json', $data);
+}
 
 
 } ?>

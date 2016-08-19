@@ -26,11 +26,6 @@ return $query;
 }
 public function edit($id,$name,$email,$phone,$message)
 {
-if($image=="")
-{
-$image=$this->contactus_model->getimagebyid($id);
-$image=$image->image;
-}
 $data=array("name" => $name,"email" => $email,"phone" => $phone,"message" => $message);
 $this->db->where( "id", $id );
 $query=$this->db->update( "mark_contactus", $data );
@@ -65,7 +60,6 @@ public function contactSubmit($name, $telephone, $email, $message)
   if(!empty($email))
   {
     $this->db->query("INSERT INTO `mark_contactus`(`name`,`email`,`phone`,`message`) VALUE('$name','$email','$telephone','$message')");
-
     $msg = "<html><body><div id=':1fn' class='a3s adM' style='overflow: hidden;'>
     <p style='color:#000;font-family:Roboto;font-size:14px'>Name : $name <br/>
   Phone : $telephone <br/>
@@ -73,8 +67,7 @@ public function contactSubmit($name, $telephone, $email, $message)
   Comment : $message
     </p>
   </div></body></html>";
-    $this->email_model->emailer($msg,'Contact Form Submission',$email,'');
-
+    // $this->email_model->emailer($msg,'Contact Form Submission',$email,'');
     $object = new stdClass();
     $object->value = true;
   }
