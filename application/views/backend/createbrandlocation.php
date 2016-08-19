@@ -21,6 +21,17 @@
 <input type="text" id="order" name="order" value='<?php echo set_value('order');?>'>
 </div>
 </div>
+<div class="row"><label>Address</label>
+<div class="input-field col s12">
+<textarea id="some-textarea" name="address" class="materialize-textarea" length="400"><?php echo set_value( 'address');?></textarea>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s6">
+<label for="contact">contact</label>
+<input type="text" id="contact" name="contact" value='<?php echo set_value('contact',$before->contact);?>'>
+</div>
+</div>
 <div class="row">
 <div class="col s12 m6">
 <button type="submit" class="btn btn-primary waves-effect waves-light blue darken-4">Save</button>

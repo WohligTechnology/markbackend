@@ -80,7 +80,7 @@ public function getBrand($id)
   if(!empty($id))
   {
     $query = $this->db->query("SELECT `id`, `name`, `about`, `salonexp`, `mainimage`, `collectionname`, `content`, `videourl`, `type` FROM `mark_brand` WHERE `id`='$id'")->row();
-    $query->location = $this->db->query("SELECT `id`, `name`, `about`, `salonexp`, `mainimage`, `collectionname`, `content`, `videourl`, `type` FROM `mark_brand` WHERE `id`='$id'")->result();
+    $query->location = $this->db->query("SELECT * FROM `location_brandlocation` WHERE `brand`='$id'")->result();
     if($query->type == 1)
     {
       //image

@@ -1707,7 +1707,7 @@ $name=$this->input->get_post("name");
 $brand=$this->input->get_post("brand");
 $content=$this->input->get_post("content");
 $order=$this->input->get_post("order");
-  $image=$this->menu_model->createImage();
+$image=$this->menu_model->createImage();
 if($this->brandproducts_model->edit($id,$image,$name,$brand,$content,$order)==0)
 $data["alerterror"]="New brandproducts could not be Updated.";
 else
@@ -1742,7 +1742,6 @@ $access=array("1");
 // $data["base_url"]=site_url("site/viewbrandlocationjson?id=").$this->input->get('id');
 // $data["title"]="View brandlocations";
 // $this->load->view("templatewith2",$data);
-
 $data["page"]="viewbrandlocation";
 $data["base_url"]=site_url("site/viewbrandlocationjson");
 $data["title"]="View location";
@@ -1931,6 +1930,11 @@ $elements[5]->field="`location_brandlocation`.`location`";
 $elements[5]->sort="1";
 $elements[5]->header="locationname";
 $elements[5]->alias="locationname";
+$elements[6]=new stdClass();
+$elements[6]->field="`location_brandlocation`.`brand`";
+$elements[6]->sort="1";
+$elements[6]->header="brand";
+$elements[6]->alias="brand";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");

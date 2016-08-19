@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class brandlocation_model extends CI_Model
 {
-public function create($brand,$location,$order)
+public function create($brand,$location,$order,$address,$contact)
 {
-$data=array("brand" => $brand,"location" => $location,"order" => $order);
+$data=array("brand" => $brand,"location" => $location,"order" => $order,"address" => $address,"contact" => $contact);
 $query=$this->db->insert( "location_brandlocation", $data );
 $id=$this->db->insert_id();
 if(!$query)
@@ -24,14 +24,14 @@ $this->db->where("id",$id);
 $query=$this->db->get("location_brandlocation")->row();
 return $query;
 }
-public function edit($id,$brand,$location,$order)
+public function edit($id,$brand,$location,$order,$address,$contact)
 {
 // if($image=="")
 // {
 // $image=$this->brandlocation_model->getimagebyid($id);
 // $image=$image->image;
 // }
-$data=array("brand" => $brand,"location" => $location,"order" => $order);
+$data=array("brand" => $brand,"location" => $location,"order" => $order,"address" => $address,"contact" => $contact);
 $this->db->where( "id", $id );
 $query=$this->db->update( "location_brandlocation", $data );
 return 1;
